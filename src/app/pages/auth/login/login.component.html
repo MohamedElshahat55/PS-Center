@@ -1,0 +1,103 @@
+<section class="relative flex flex-wrap lg:h-screen lg:items-center">
+  <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
+    <div class="mx-auto max-w-lg text-center">
+      <h1 class="text-2xl font-bold sm:text-3xl">Get started today!</h1>
+
+      <p class="mt-4 text-gray-500">
+        "Every game is a new challenge – get in, play hard, and have fun!"
+      </p>
+    </div>
+
+    <form
+      class="mx-auto mb-0 mt-8 max-w-md space-y-4"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div>
+        <label for="email" class="sr-only">Email</label>
+
+        <div class="relative">
+          <input
+            type="email"
+            class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+            placeholder="Enter email"
+            formControlName="email"
+          />
+          <div
+            *ngIf="
+              loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+            "
+          >
+            <em
+              *ngIf="loginForm.get('email')?.hasError('required')"
+              class="text-red-500 text-sm mt-1"
+              >*email is required</em
+            >
+            <em
+              *ngIf="loginForm.get('email')?.hasError('email')"
+              class="text-red-500 text-sm mt-1"
+              >*wrong format</em
+            >
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label for="password" class="sr-only">Password</label>
+
+        <div class="relative">
+          <input
+            type="password"
+            class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+            placeholder="Enter password"
+            formControlName="password"
+          />
+          <div
+            *ngIf="
+              loginForm.get('password')?.invalid &&
+              loginForm.get('password')?.touched
+            "
+          >
+            <em
+              *ngIf="loginForm.get('password')?.hasError('required')"
+              class="text-red-500 text-sm mt-1"
+              >*password is required</em
+            >
+            <em
+              *ngIf="loginForm.get('password')?.hasError('minlength')"
+              class="text-red-500 text-sm mt-1"
+            >
+              *Password must be at least
+              {{
+                loginForm.get("password")?.getError("minlength")?.requiredLength
+              }}
+              characters
+            </em>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <p class="text-sm text-gray-500">
+          No account?
+          <a class="underline" routerLink="/register">Sign up</a>
+        </p>
+
+        <button
+          class="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white disabled:bg-blue-300 disabled:cursor-not-allowed"
+          [disabled]="loginForm.invalid"
+        >
+          Sign in
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
+    <img
+      alt=""
+      src="https://images.unsplash.com/photo-1677174996268-584fcfaa1cba?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHBsYXlzdGF0aW9uJTIwY29udHJvbGxlcnxlbnwwfHwwfHx8MA%3D%3D"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+  </div>
+</section>
