@@ -10,9 +10,9 @@ While enjoying epic 🎮 PlayStation 🎮 sessions with my friends 😄 at a loc
 
 You can see a demo of the system from here.
 
-<img src="/ps-angular/demo/src/assets/login.png" width="300" alt="Image 1" />
-<img src="/ps-angular/demo/src/assets/register.png" width="300" alt="Image 2" />
-<img src="/ps-angular/demo/src/assets/home.png" width="300" alt="Image 3" />
+<img src="/assets/login.png" width="300" alt="Image 1" />
+<img src="/assets/register.png" width="300" alt="Image 2" />
+<img src="/assets/home.png" width="300" alt="Image 3" />
 
 <hr/>
 
