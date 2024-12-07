@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { DestroyRef, inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { OrderTypes } from '../pages/orders/types/Order';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 // PERCENTAGE_TYPES
@@ -89,6 +89,8 @@ export class DashboardService {
 
   // GET_DOCS_COUNT
   getDocsCount(): Observable<DocsCountI> {
-    return this._http.get<DocsCountI>(`${this._env.baseURL}/docs-count`);
+    return this._http
+      .get<DocsCountI>(`${this._env.baseURL}/docs-count`)
+      .pipe(shareReplay(1));
   }
 }

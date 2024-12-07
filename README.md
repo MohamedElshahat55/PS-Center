@@ -1,6 +1,6 @@
 ## PlayStation Center Management System
 
-While enjoying epic 🎮 PlayStation 🎮 sessions with my friends 😄 at a local gaming hub 🕹️, I noticed they had a cool system to track the time spent on each gaming console ⏱️. Inspired by this awesome setup, I decided to create my own version, with extra features to make the experience even better ✨. I proudly present the PS Center Server – an API that helps you monitor and manage gaming sessions 🕹️, calculate playtime ⏳ on multiple devices, and offer cool extras like ordering snacks 🍿 and much more 🚀!
+While enjoying epic 🎮 PlayStation 🎮 sessions with my friends 😄 at a local gaming hub 🕹️, I noticed they had a cool system to track the time spent on each gaming console ⏱️. Inspired by this awesome setup, I decided to create my own version, with extra features to make the experience even better ✨.
 
 > **Note**: A special thanks to [Omar Mayallo](https://github.com/omar1Mayallo) for the inspiration behind this idea! 🙏✨
 
@@ -10,17 +10,16 @@ While enjoying epic 🎮 PlayStation 🎮 sessions with my friends 😄 at a loc
 
 You can see a demo of the system from here.
 
-<img src="/assets/login.png" width="300" alt="Image 1" />
+<!-- <img src="/assets/login.png" width="300" alt="Image 1" />
 <img src="/assets/register.png" width="300" alt="Image 2" />
-<img src="/assets/home.png" width="300" alt="Image 3" />
+<img src="/assets/home.png" width="300" alt="Image 3" /> -->
 
 <hr/>
 
 ## Client & Server Code
 
-The code for the client and server of this system can be found in the following repositories:
+The code for the server of this system can be found in the following repository:
 
-- Client Code: Ps-Center-Client
 - [Server Code: Ps-Center-Server](https://github.com/omar1Mayallo/ps-center-server)
 
 ## Tech Stack
