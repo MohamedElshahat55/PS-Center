@@ -1,0 +1,46 @@
+<section
+  class="card shadow-md mx-w-[330px] p-4 border rounded-md dark:bg-gray-800 dark:border-0 dark:rounded-none"
+>
+  <!-- card header -->
+  <div class="flex gap-4 items-center justify-between my-4">
+    <h2 class="p-2 text-xs bg-slate-200 rounded-xl dark:bg-slate-400">
+      {{ sessionItem()._id }}
+    </h2>
+    <span (click)="deleteSession(sessionItem())"
+      ><i class="fa-solid fa-trash cursor-pointer text-red-600"></i
+    ></span>
+  </div>
+
+  <!-- info -->
+
+  <div class="flex flex-col gap-2">
+    <p class="p-1 text-sm rounded-lg bg-blue-600 text-white text-center">
+      {{ sessionItem().device.type }}-{{ sessionItem().device.name }}
+    </p>
+    <p class="p-1 text-sm rounded-lg bg-green-700 text-white text-center">
+      {{ hours }} hours:{{ minutes }} minutes
+    </p>
+    <p class="p-1 text-sm rounded-lg bg-red-500 text-white text-center">
+      {{ sessionItem().type }}
+    </p>
+  </div>
+
+  <div class="flex justify-between">
+    <div class="flex flex-col gap-2 my-4">
+      <p class="p-1 text-sm rounded-lg bg-purple-600 text-white text-center">
+        Game Price:{{ sessionItem().gamePrice | currency }}
+      </p>
+      <p class="p-1 text-sm rounded-lg bg-red-600 text-white text-center">
+        Total Price:{{ sessionItem().sessionPrice | currency }}
+      </p>
+    </div>
+    <div class="ml-4 mt-auto">
+      <p class="text-xs text-slate-500 dark:text-slate-400">
+        Created at: {{ sessionItem().createdAt | date }}
+      </p>
+      <p class="text-xs text-slate-500 dark:text-slate-400">
+        Updated at: {{ sessionItem().updatedAt | date }}
+      </p>
+    </div>
+  </div>
+</section>

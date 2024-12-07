@@ -5,12 +5,11 @@ import {
   effect,
   inject,
   Injectable,
-  Injector,
   signal,
 } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import User from '../pages/auth/types/User';
-import { map, Observable } from 'rxjs';
+import User, { UserRoles } from '../pages/auth/types/User';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 
@@ -25,6 +24,8 @@ const USER_STORAGE_KEY = 'user';
   providedIn: 'root',
 })
 export class AuthService {
+  userInfo = new BehaviorSubject<AuthResponse | null>(null);
+
   #userSignal = signal<AuthResponse | null>(null);
 
   user = this.#userSignal.asReadonly();
@@ -34,6 +35,7 @@ export class AuthService {
     this.loadUserFromLocalStorage();
     effect(() => {
       const user = this.user();
+
       if (user) {
         localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
       }
@@ -45,6 +47,7 @@ export class AuthService {
     if (json) {
       const user = JSON.parse(json);
       this.#userSignal.set(user);
+      this.userInfo.next(user);
     }
   }
 
@@ -77,6 +80,7 @@ export class AuthService {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((user) => {
         this.#userSignal.set(user);
+        this.userInfo.next(user);
         this._router.navigateByUrl('/devices');
       });
   }
@@ -84,6 +88,7 @@ export class AuthService {
   logOut() {
     localStorage.removeItem(USER_STORAGE_KEY);
     this.#userSignal.set(null);
+    this.userInfo.next(null);
     this._router.navigateByUrl('/login');
   }
 }

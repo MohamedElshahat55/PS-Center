@@ -1,0 +1,67 @@
+<section
+  class="card shadow-md mx-w-[300px] p-4 border rounded-md dark:bg-gray-800 dark:border-0 dark:rounded-none"
+>
+  <div class="flex gap-4 items-center justify-between">
+    <div class="flex gap-4 uppercase">
+      <h2 class="mt-1 text-xs p-1 bg-slate-300 rounded-full dark:bg-slate-400">
+        {{ orderItem()._id }}
+      </h2>
+    </div>
+
+    <div class="flex gap-4 items-center justify-between">
+      @if(orderItem().type === 'IN_DEVICE'){
+      <span class="bg-blue-500 rounded-full text-white text-xs p-1"
+        >Device
+      </span>
+      }@else {
+      <div></div>
+      }
+      <span (click)="deleteOrder(orderItem())"
+        ><i class="fa-solid fa-trash cursor-pointer text-red-600"></i
+      ></span>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <div class="flex gap-3 flex-wrap dark:text-white">
+      @for (item of orderItem().orderItems; track item) {
+      <div class="flex gap-3 items-center border-r border-slate-300 p-4 my-2">
+        <span class="text-sm font-bold">{{ item.snack.name }}</span>
+        <div>
+          <span class="font-bold text-sm rounded-full">{{
+            item.quantity
+          }}</span>
+          X
+          <span class="p-1 text-xs bg-orange-600 text-white rounded-full">{{
+            item.price | currency
+          }}</span>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="flex justify-between">
+    <div class="flex flex-col gap-2 my-4">
+      <p class="p-1 text-sm rounded-lg bg-purple-700 text-white text-center">
+        Total Price:{{ orderItem().orderPrice | currency }}
+      </p>
+
+      @if ( orderItem().status === 'IN_PROGRESS') {
+      <p class="p-1 text-sm rounded-lg bg-green-600 text-white text-center">
+        IN_PROGRESS
+      </p>
+      }@else {
+      <p class="p-1 text-sm rounded-lg bg-slate-300 text-center">DONE</p>
+      }
+    </div>
+    <div class="ml-4 mt-auto">
+      <p class="text-xs text-slate-500">
+        Created at:{{ orderItem().createdAt | date }}
+      </p>
+      <p class="text-xs text-slate-500">
+        Updated at:{{ orderItem().updatedAt | date }}
+      </p>
+    </div>
+  </div>
+</section>

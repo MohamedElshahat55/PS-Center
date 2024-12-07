@@ -1,0 +1,130 @@
+<section class="p-4">
+  <h2 class="font-bold text-xl">Add New Snack</h2>
+  <div>
+    <form
+      class="mx-auto mb-0 mt-8 max-w-xl space-y-4"
+      [formGroup]="createForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div>
+        <label for="name" class="sr-only">Name</label>
+
+        <div class="relative">
+          <input
+            type="text"
+            class="w-full rounded-lg border border-gray-900 p-4 pe-12 text-sm placeholder:text-slate-600"
+            placeholder=" Name"
+            formControlName="name"
+          />
+          <em
+            *ngIf="
+              createForm.get('name')?.invalid && createForm.get('name')?.touched
+            "
+            class="text-red-600 text-sm mt-1 font-semibold"
+            >*Name is required</em
+          >
+        </div>
+      </div>
+
+      <div>
+        <label for="type" class="sr-only">Quantity In Stock</label>
+
+        <div class="relative">
+          <input
+            type="number"
+            class="w-full rounded-lg border border-gray-900 p-4 pe-12 text-sm placeholder:text-slate-600"
+            placeholder=" Quantity In Stock"
+            formControlName="quantityInStock"
+          />
+          <div
+            *ngIf="
+              createForm.get('quantityInStock')?.invalid &&
+              createForm.get('quantityInStock')?.touched
+            "
+          >
+            <em
+              *ngIf="createForm.get('quantityInStock')?.hasError('required')"
+              class="text-red-600 text-sm mt-1 font-semibold"
+              >*Quantity In Stock is required</em
+            >
+            <em
+              *ngIf="createForm.get('quantityInStock')?.hasError('pattern')"
+              class="text-red-600 text-sm mt-1 font-semibold"
+              >*Quantity In Stock must be a positive number</em
+            >
+          </div>
+        </div>
+      </div>
+      <div>
+        <label for="type" class="sr-only">Buying Price </label>
+
+        <div class="relative">
+          <input
+            type="number"
+            class="w-full rounded-lg border border-gray-900 p-4 pe-12 text-sm placeholder:text-slate-600"
+            placeholder=" Buying Price"
+            formControlName="buyingPrice"
+          />
+          <div
+            *ngIf="
+              createForm.get('buyingPrice')?.invalid &&
+              createForm.get('buyingPrice')?.touched
+            "
+          >
+            <em
+              *ngIf="createForm.get('buyingPrice')?.hasError('required')"
+              class="text-red-600 text-sm mt-1 font-semibold"
+              >*Buying Price is required</em
+            >
+            <em
+              *ngIf="createForm.get('buyingPrice')?.hasError('pattern')"
+              class="text-red-600 text-sm mt-1 font-semibold"
+              >*Buying Price must be a positive number</em
+            >
+          </div>
+        </div>
+      </div>
+      <div>
+        <label for="type" class="sr-only">Selling Price </label>
+
+        <div class="relative">
+          <input
+            type="number"
+            class="w-full rounded-lg border border-gray-900 p-4 pe-12 text-sm placeholder:text-slate-600"
+            placeholder=" Selling Price"
+            formControlName="sellingPrice"
+          />
+          <div
+            *ngIf="
+              createForm.get('sellingPrice')?.invalid &&
+              createForm.get('sellingPrice')?.touched
+            "
+          >
+            <em
+              *ngIf="createForm.get('sellingPrice')?.hasError('required')"
+              class="text-red-600 text-sm mt-1 font-semibold"
+              >*Selling Price is required</em
+            >
+            <em
+              *ngIf="createForm.get('sellingPrice')?.hasError('pattern')"
+              class="text-red-600 text-sm mt-1 font-semibold"
+              >*Selling Price must be a positive number</em
+            >
+          </div>
+        </div>
+      </div>
+      <div class="my-4">
+        <button
+          class="w-full cursor-pointer text-center group relative inline-block text-sm font-medium text-blue-600 focus:outline-none focus:ring active:text-red-500"
+        >
+          <span class="absolute inset-0 border border-current"></span>
+          <span
+            class="block border text-white border-current bg-blue-500 px-12 py-2 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1"
+          >
+            Create
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

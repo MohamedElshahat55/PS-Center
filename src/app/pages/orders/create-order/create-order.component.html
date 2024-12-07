@@ -1,0 +1,86 @@
+<section class="p-4">
+  <h2 class="font-bold text-xl">Add New Order</h2>
+  <div>
+    <form
+      class="mx-auto mb-0 mt-8 max-w-xl space-y-4"
+      [formGroup]="createForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div>
+        @if (snacks$ | async ; as snacks) {
+        <select
+          name="snack"
+          id="snack"
+          class="w-full rounded-lg border border-gray-900 p-4 pe-12 text-sm placeholder:text-slate-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          formControlName="snackId"
+        >
+          <option value="">Select Snack</option>
+          @for (snack of snacks.data.docs; track $index) {
+          <option [value]="snack._id">{{ snack.name }}</option>
+          }
+        </select>
+        }
+      </div>
+
+      <div>
+        <label for="type" class="sr-only">Quantity </label>
+
+        <div class="relative">
+          <input
+            type="number"
+            class="w-full rounded-lg border border-gray-900 p-4 pe-12 text-sm placeholder:text-slate-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder=" Quantity"
+            formControlName="quantity"
+          />
+          <div
+            *ngIf="
+              createForm.get('quantity')?.invalid &&
+              createForm.get('quantity')?.touched
+            "
+          >
+            <em
+              *ngIf="createForm.get('quantity')?.hasError('required')"
+              class="text-red-600 text-sm mt-1 font-semibold"
+              >*Quantity In Stock is required</em
+            >
+            <em
+              *ngIf="createForm.get('quantity')?.hasError('pattern')"
+              class="text-red-600 text-sm mt-1 font-semibold"
+              >*Quantity In Stock must be a positive number</em
+            >
+          </div>
+        </div>
+      </div>
+
+      <div>
+        @if ( devices) {
+        <select
+          name="device"
+          id="device"
+          class="w-full rounded-lg border border-gray-900 p-4 pe-12 text-sm placeholder:text-slate-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          formControlName="deviceId"
+        >
+          <option value="">Select Device</option>
+          <option value="">None</option>
+          @for (device of devices; track device._id) {
+          <option [value]="device._id">{{ device.name }}</option>
+          }
+        </select>
+        }
+      </div>
+
+      <div class="my-4">
+        <button
+          class="w-full cursor-pointer text-center group relative inline-block text-sm font-medium text-blue-600 focus:outline-none focus:ring active:text-red-500"
+        >
+          <span class="absolute inset-0 border border-current"></span>
+          <span
+            class="block border text-white border-current bg-blue-500 px-12 py-2 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1"
+          >
+            Create
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

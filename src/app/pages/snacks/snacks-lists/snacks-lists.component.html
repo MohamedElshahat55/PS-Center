@@ -1,0 +1,24 @@
+<section appRoleBased="OWNER | ADMIN">
+  <div class="flex justify-end">
+    <div class="inline-flex rounded-md shadow-sm" role="group">
+      <button
+        routerLink="/snacks/create"
+        type="button"
+        class="px-4 py-2 text-sm font-medium text-blue-700 bg-transparent border border-blue-700 rounded-s-lg hover:bg-blue-700 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-blue-700 focus:text-white"
+      >
+        <span class="mx-1"><i class="fa-solid fa-add"></i></span> ADD NEW
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-3 mt-5 gap-3">
+  @for (snack of snacks; track snack._id) {
+  <app-snack-card
+    [snackItem]="snack"
+    (snackDeleted)="onSnackDeleted($event)"
+  ></app-snack-card>
+  }@empty {
+  <h2>snacks are loading</h2>
+  }
+</div>

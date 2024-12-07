@@ -1,0 +1,183 @@
+<section
+  class="card shadow-md mx-w-[300px] min-h-[500px] p-4 border rounded-md dark:bg-gray-800 dark:border-0 dark:rounded-none"
+>
+  <!-- card header -->
+  <div class="flex gap-4 items-center justify-between">
+    <div class="flex gap-4">
+      <h2 class="font-bold mt-1 uppercase dark:text-white">
+        {{ deviceItem().name }}
+      </h2>
+      <span class="bg-blue-500 text-white rounded-xl p-2 text-xs">{{
+        deviceItem().type
+      }}</span>
+    </div>
+
+    <!-- card icons -->
+    <div appRoleBased="OWNER | ADMIN">
+      <div class="flex gap-4 items-center justify-between">
+        <span [routerLink]="['/devices/edit', deviceItem()._id]"
+          ><i class="fa-solid fa-pencil cursor-pointer text-green-600"></i
+        ></span>
+        <span (click)="deleteDevice(deviceItem())"
+          ><i class="fa-solid fa-trash cursor-pointer text-red-600"></i
+        ></span>
+      </div>
+    </div>
+  </div>
+  @if (deviceItem().type === 'Ps4') {
+  <div class="my-3">
+    <img
+      src="https://images.unsplash.com/photo-1700154636736-cb5f4c3751b3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      alt=""
+      class="rounded-3xl object-cover"
+    />
+  </div>
+  }@else {
+  <div class="my-3">
+    <img
+      src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D"
+      alt=""
+      class="rounded-3xl"
+    />
+  </div>
+  }
+  <div class="flex items-center justify-between my-4">
+    <h2 class="p-2 text-xs bg-slate-200 rounded-xl dark:bg-slate-400">
+      {{ deviceItem()._id }}
+    </h2>
+    @if (deviceItem().isEmpty) {
+    <span class="bg-slate-200 rounded-xl p-2 text-xs dark:bg-slate-400"
+      >Empty</span
+    >
+    }@else {
+    <span class="bg-green-500 rounded-xl p-2 text-xs text-white font-bold"
+      >Playing</span
+    >
+    }
+  </div>
+  <!-- select box -->
+  @if (deviceItem().isEmpty) {
+  <div appRoleBased="OWNER | ADMIN">
+    <label for="HeadlineAct" class="block text-sm font-medium dark:text-white">
+      Select Session Type
+    </label>
+
+    <select
+      name="HeadlineAct"
+      id="HeadlineAct"
+      class="mt-1.5 w-full border sm:text-sm h-10 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      [formControl]="sessionType"
+      (change)="onSessionTypeChange($event, deviceItem())"
+    >
+      @for (sessionType of sessionTypes; track $index) {
+      <option [value]="sessionType">{{ sessionType }}</option>
+      }
+    </select>
+  </div>
+  }
+  <!-- Start btn -->
+  @if (!deviceItem().startTime) {
+  <div class="my-4" appRoleBased="OWNER | ADMIN">
+    <a
+      class="cursor-pointer w-full text-center group relative inline-block text-sm font-medium text-green-600 focus:outline-none focus:ring active:text-green-500 dark:text-green-400 dark:active:text-green-300"
+    >
+      <span
+        class="absolute inset-0 border border-current dark:border-gray-600"
+      ></span>
+      <span
+        (click)="startTimeDevice(deviceItem())"
+        class="block font-bold border border-current bg-white px-12 py-2 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1 dark:bg-gray-800 dark:text-green-400 dark:border-gray-600"
+      >
+        START TIME
+      </span>
+    </a>
+  </div>
+  }@else {
+  <div class="mb-2">
+    <app-timer [startTime]="deviceItem().startTime ?? 0"></app-timer>
+  </div>
+
+  @if (deviceItem().order) {
+  <p
+    appRoleBased="OWNER | ADMIN"
+    class="my-3 text-xs cursor-pointer px-10 dark:text-white"
+    [routerLink]="['/orders', deviceItem().order, 'edit']"
+  >
+    Order:<strong class="underline text-blue-500">{{
+      deviceItem().order
+    }}</strong>
+  </p>
+  }
+  <div class="my-4" appRoleBased="OWNER | ADMIN">
+    <a
+      class="cursor-pointer w-full text-center group relative inline-block text-sm font-medium text-red-600 focus:outline-none focus:ring active:text-red-500 dark:text-red-400 dark:active:text-red-300"
+    >
+      <span
+        class="absolute inset-0 border border-current dark:border-gray-600"
+      ></span>
+      <span
+        (click)="endTimeDevice(deviceItem())"
+        class="block font-bold border border-current bg-white px-12 py-2 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1 dark:bg-gray-800 dark:text-red-400 dark:border-gray-600"
+      >
+        END TIME
+      </span>
+    </a>
+  </div>
+  @if (!deviceItem().order) {
+  <div appRoleBased="OWNER | ADMIN">
+    <a
+      routerLink="/orders/create"
+      [queryParams]="{ deviceId: deviceItem()._id }"
+      class="cursor-pointer w-full text-center group relative inline-block text-sm font-medium text-green-600 focus:outline-none focus:ring active:text-green-500 dark:text-green-400 dark:active:text-green-300"
+    >
+      <span
+        class="absolute inset-0 border border-current dark:border-gray-600"
+      ></span>
+      <span
+        class="block font-bold border border-current bg-white px-12 py-2 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1 dark:bg-gray-800 dark:text-green-400 dark:border-gray-600"
+      >
+        MAKE ORDER
+      </span>
+    </a>
+  </div>
+  }
+  <div class="my-4" appRoleBased="OWNER | ADMIN">
+    <a
+      (click)="resetDevice(deviceItem())"
+      class="cursor-pointer w-full text-center group relative inline-block text-sm font-medium text-blue-600 focus:outline-none focus:ring active:text-red-500 dark:text-blue-400 dark:active:text-blue-300"
+    >
+      <span
+        class="absolute inset-0 border border-current dark:border-gray-600"
+      ></span>
+      <span
+        class="block border border-current bg-white px-12 py-2 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1 dark:bg-gray-800 dark:text-white dark:border-gray-600"
+      >
+        RESET
+      </span>
+    </a>
+  </div>
+  }
+
+  <!-- info -->
+  <div class="flex gap-2">
+    <div class="w-2/3 flex flex-col gap-2">
+      <p class="p-1 text-sm rounded-lg bg-red-600 text-white inline-flex">
+        Session Type: {{ deviceItem().sessionType }}
+      </p>
+      <p class="p-1 text-sm rounded-lg bg-purple-600 text-white inline-flex">
+        Duo Price: {{ deviceItem().duoPricePerHour | currency }}
+      </p>
+      <p class="p-1 text-sm rounded-lg bg-purple-600 text-white inline-flex">
+        Multi Price: {{ deviceItem().multiPricePerHour | currency }}
+      </p>
+    </div>
+    <div class="w-2/3 ml-4 mt-auto">
+      <p class="text-xs text-slate-500 dark:text-slate-400">
+        Created at: {{ deviceItem().createdAt | date }}
+      </p>
+      <p class="text-xs text-slate-500 dark:text-slate-400">
+        Updated at: {{ deviceItem().updatedAt | date }}
+      </p>
+    </div>
+  </div>
+</section>
