@@ -1,5 +1,5 @@
 <section>
-  <h2 class="font-bold text-xl">Dashboard</h2>
+  <h2 class="font-bold text-xl dark:text-white">Dashboard</h2>
   @if (docsCounts$ | async ; as docsCounts) {
   <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-4 my-4 px-6">
     @for (docCount of docsCounts; track $index) {

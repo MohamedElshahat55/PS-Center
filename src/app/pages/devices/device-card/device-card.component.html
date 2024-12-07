@@ -57,7 +57,7 @@
   </div>
   <!-- select box -->
   @if (deviceItem().isEmpty) {
-  <div appRoleBased="OWNER | ADMIN">
+  <div appRoleBased="OWNER | ADMIN" class="my-10">
     <label for="HeadlineAct" class="block text-sm font-medium dark:text-white">
       Select Session Type
     </label>
@@ -77,7 +77,7 @@
   }
   <!-- Start btn -->
   @if (!deviceItem().startTime) {
-  <div class="my-4" appRoleBased="OWNER | ADMIN">
+  <div class="mb-14" appRoleBased="OWNER | ADMIN">
     <a
       class="cursor-pointer w-full text-center group relative inline-block text-sm font-medium text-green-600 focus:outline-none focus:ring active:text-green-500 dark:text-green-400 dark:active:text-green-300"
     >
@@ -93,7 +93,7 @@
     </a>
   </div>
   }@else {
-  <div class="mb-2">
+  <div class="my-6">
     <app-timer [startTime]="deviceItem().startTime ?? 0"></app-timer>
   </div>
 

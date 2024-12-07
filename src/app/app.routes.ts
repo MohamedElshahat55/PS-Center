@@ -98,7 +98,7 @@ export const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent,
         canActivate: [roleGuard],
-        data: { roles: ['ADMIN'] },
+        data: { roles: ['OWNER'] },
       },
     ],
   },
